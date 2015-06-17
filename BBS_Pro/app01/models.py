@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.db import models
 from django.contrib.auth.models  import User
 
@@ -19,6 +20,7 @@ class Comment(models.Model):
 class Category(models.Model):
     name=models.CharField(max_length=32,unique=True)
     administrator=models.ForeignKey('BBS_user')
+    message=models.TextField()
     def __unicode__(self):
         return self.name
 class BBS_user(models.Model):
@@ -28,3 +30,7 @@ class BBS_user(models.Model):
 
     def  __unicode__(self):
         return self.user.username
+
+
+#自定义管理器
+# class ArticleManager(models.Manager):

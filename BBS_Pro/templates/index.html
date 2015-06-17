@@ -1,6 +1,9 @@
+
+{% load pagination_tags %}
 <!DOCTYPE html>
 <!-- saved from url=(0048)http://v3.bootcss.com/examples/navbar-fixed-top/ -->
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,24 +35,33 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">抽屉</a>
+          <a class="navbar-brand" href="#">创世纪</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-           <li class="active"><a href="#">全部</a></li>
+            
+                 {%if index_id  %}
+                      <li class="active"><a href="/">全部</a></li>
+                  {%else%}
+                      <li class=""><a href="/">全部</a></li>
+                  {%endif%}
+               
+
+
 			{%for category in bbs_category%}
-			
 		
-			
-			{%ifequal category.id cata_id %}
+	
+			      {%ifequal category.id cata_id %}
 			 
-			<li class="active"><a href="/category/{{category.id}}/">
-			{{category.name}}</a></li>
-			{%else%}
-			<li class=""><a href="/category/{{category.id}}/">
-			{{category.name}}</a></li>
+			       <li class="active"><a href="/category/{{category.id}}/">
+			             {{category.name}}</a></li>
+			      {%else%}
+		                	<li class=""><a href="/category/{{category.id}}/">
+			                 {{category.name}}</a></li>
 			
-			{%endifequal%}
+			       {%endifequal%}
+     
+  
 			{%endfor%}
 			</ul>
 			
@@ -83,13 +95,18 @@
 		{%block  page-content%}
       <!-- Main component for a primary marketing message or call to action -->
       <div class="contents">
+
+
 		{%for bbs in bbs_list%}
 		<a href="/detail/{{bbs.id}}/">{{bbs.title}}</a>
 		<br>
+   
 		{{bbs.summary}}
 		<hr>
 		{%endfor%}
+    {% paginate %}
       </div>
+      
 		{%endblock%}
     </div> <!-- /container -->
 

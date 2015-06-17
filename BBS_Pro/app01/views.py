@@ -7,6 +7,20 @@ from django.http import  HttpResponseRedirect
 from django.contrib  import auth
 from django.contrib  import comments
 import models
+import logging
+#from django.conf import settings
+#def global_setting(request):
+  #  return  {
+  #  'SITE_NAME'=settings.SITE_NAME,
+  #'SITE_DESC'=settings.SITE_DESC
+  #  }
+logger=logging.getLogger('app01.views')
+def index1(request):
+    try:
+        file1=open('ddd.txt','r')
+    except Exception as e:
+        logger.error(e)
+    return render(request,'index1.html',locals())
 
 def acc_login(request):
     username=request.POST.get('username')
@@ -35,11 +49,12 @@ def login(request):
 def index(request):
     bbs_list=models.BBS.objects.all()
     bbs_categories=models.Category.objects.all()
+    index_id=True
     return render_to_response('index.html',{
         'bbs_list':bbs_list,
         'user':request.user,
         'bbs_category':bbs_categories,
-        
+        'index_id':index_id
         })
 
 
@@ -54,9 +69,11 @@ def category(request,cata_id):
 
 def bbs_detail(request,bbs_id):
     bbs=models.BBS.objects.get(id=bbs_id)
+    category=models.Category.objects.all()
     return render_to_response('bbs_detail.html',{
         'bbs_obj':bbs,
-        'user':request.user})
+        'user':request.user,
+        'bbs_category':category})
 
 
 def sub_comment(request):
@@ -88,6 +105,8 @@ def bbs_sub(request):
 
 def bbs_pub(request):
     return render_to_response('bbs_pub.html')
+
+
 '''
 #虫师
 #定义表单模型

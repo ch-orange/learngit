@@ -9,8 +9,16 @@ class BBS_admin(admin.ModelAdmin):
     def signature(self,obj):
         return obj.author.signature
     signature.short_description='hah'
-    
+
+class Category_admin(admin.ModelAdmin):
+    list_display=('name','administrator')
+    class Media:
+        js = (
+            '/static/js/kindeditor-4.1.10/kindeditor-min.js',
+            '/static/js/kindeditor-4.1.10/lang/zh_CN.js',
+            '/static/js/kindeditor-4.1.10/config.js',
+        )
 # Register your models here.
 admin.site.register(BBS,BBS_admin)
-admin.site.register(Category)
+admin.site.register(Category,Category_admin)
 admin.site.register(BBS_user)

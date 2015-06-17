@@ -1,0 +1,10 @@
+功能模块：
+1、登录注销
+2、发帖、评论
+3、分板块
+4、可置顶、下沉
+5、bootstrap-admin后台美化
+6、日志器使用
+7、富文本框使用（category）
+8、文件上传（category）
+9、pagination分页
